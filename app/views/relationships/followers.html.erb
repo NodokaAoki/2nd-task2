@@ -30,14 +30,14 @@
 						<tr>
 							<td><%= attachment_image_tag follower, :profile_image, size:"50x50", fallback: "no-image-mini.jpg" %></td>
 							<td><%= follower.name%></td>
-							<td>フォロー数：<%= follow.followings.count %></td>
-							<td>フォロワー数：<%= follow.followers.count %></td>
-							<% if follow.id == current_user.id %>
+							<td>フォロー数：<%= follower.followings.count %></td>
+							<td>フォロワー数：<%= follower.followers.count %></td>
+							<% if follower.id == current_user.id %>
 								<td></td>
-							<% elsif follow.following_by?(current_user) %>
-								<td><%= link_to 'フォロー外す',user_relationships_path(follow), method: :delete %></td>
+							<% elsif follower.following_by?(current_user) %>
+								<td><%= link_to 'フォロー外す',user_relationships_path(follower), method: :delete %></td>
 							<% else %>
-								<td><%= link_to 'フォローする',user_relationships_path(follow), method: :post %></td>
+								<td><%= link_to 'フォローする',user_relationships_path(follower), method: :post %></td>
 							<% end %>
 							<td><%= link_to "Show", user_path(follower.id) %></td>
 						</tr>

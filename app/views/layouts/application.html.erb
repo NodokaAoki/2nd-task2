@@ -12,7 +12,7 @@
   <body>
     <!--ヘッダーの記述-->
     <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
+      <div class="container clearfix">
 
         <nav class="nav navbar-nav navbar-left">
           <span>Bookers</span>
@@ -33,9 +33,27 @@
             <% end %>
           </ul>
         </nav>
-
       </div>
+
     </header>
+
+    <!-- 検索フォーム -->
+<% if user_signed_in? %>
+
+  <div class="container">
+    <div class="col-xs-12 search text-center">
+    <%= form_tag(search_search_path,method: :get,class: "form-inline") do %>
+      <%= text_field_tag :keyword, params[:keyword],placeholder: "名前またはタイトル",class: "form-control" %>
+      <%= select_tag "target",options_for_select([["User","1"],["Book","2"]]),class: "form-control" %>
+      <%= select_tag "range",options_for_select([["完全一致","1"],["前方一致","2"],["後方一致","3"],["部分一致","4"]]),class: "form-control" %>
+      <%= submit_tag "検索",class: "btn btn-info" %>
+    <% end %>
+    </div>
+  </div>
+
+<% end %>
+    <!-- /検索フォーム -->
+
     <!--ヘッダーの記述-->
     <div class="container">
       <p id="notice"><%= notice %></p> <!--デバイスでnotice設定されているので呼び出してるだけ-->
