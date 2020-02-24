@@ -1,0 +1,16 @@
+<% if session[:error].present? %>
+  <div id="error_explanation">
+    <h2 class="error_count"><%= session[:error_count] %>error prohibited this book from being saved:</h2>
+    <ul>
+      <% session[:error].each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+      <% session[:error] = nil %>
+  </div>
+<% end %>
+
+	<%= form_with model: [book, comment] do |f| %>
+		<%= f.text_area :comment %>
+		<%= f.submit "Comment", class: "btn btn-primary" %>
+	<% end %>
