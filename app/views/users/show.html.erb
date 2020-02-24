@@ -25,7 +25,11 @@
 			</thead>
 
 			<tbody class="post">
-		<%= render 'books/post', books: @books %>
+				<% @books.each do |book| %>
+				<tr id="book-<%= book.id %>">
+					<%= render 'books/book',book: book %>
+				</tr>
+				<% end %>
 			</tbody>
 		</table>
 		<!--books一覧 -->
