@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable,:validatable
 
+  after_create :send_thanks_mail
+
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
@@ -43,6 +45,11 @@ class User < ApplicationRecord
   # 住所結合
   def address
     self.prefecture_name + self.address_city + self.address_street
+  end
+
+  # サンクスメール
+  def send_thanks_mail
+    UserMailer.user_thanks_mail(self).deliver
   end
 
 end
